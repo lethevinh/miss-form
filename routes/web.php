@@ -22,7 +22,7 @@ Route::get('/contestants-information-form.html', function () {
     return view('admin.information', ["data"=>$data]);
 });
 Route::get('/miss-charm-international-2020.html', function () {
-    $data = ContestantsInformationForm::all();
+    $data = \App\NationalDirectorForm::all();
     return view('admin.international', ["data"=>$data]);
 });
 Route::get('/official-entry-form.html', function () {

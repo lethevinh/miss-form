@@ -39,3 +39,19 @@ Route::post('miss/contestants-information-form', function (Request $request) {
 	$model = ContestantsInformationForm::create($input);
 	return response()->json($model);
 })->name('miss.contestants-information-form');
+
+Route::post('miss/national-director-form', function (Request $request) {
+    $input = $request->input();
+    $files = ['ndf_licensee_signature'];
+    foreach ($files as $key => $value) {
+        if ($request->hasFile($value)) {
+            $file = request()->$value;
+            $name = $input['cif_first_name'] . '_' . $input['cif_family_name'];
+            $imageName = Str::slug(time() . '_' . $value . '_' . $name, '-') . '.' . $file->getClientOriginalExtension();
+            $path = $file->move(public_path('uploads'), $imageName);
+            $input[$value] = 'uploads' . '/' . $imageName;
+        }
+    }
+    $model = \App\NationalDirectorForm::create($input);
+    return response()->json($model);
+})->name('miss.national-director-form');
