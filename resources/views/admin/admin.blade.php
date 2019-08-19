@@ -246,8 +246,8 @@
                                     </thead>
                                     <tfoot>
                                         <tr>
+                                            <th>Country</th>
                                             <th>Name</th>
-                                            <th>Position</th>
                                             <th>Office</th>
                                             <th>Age</th>
                                             <th>Start date</th>
@@ -257,8 +257,8 @@
                                     <tbody>
                                     @forelse ($data as $item)
                                         <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
+                                            <td>{{$item->cif_country}}</td>
+                                            <td>{{$item->cif_family_name}}</td>
                                             <td>Edinburgh</td>
                                             <td>61</td>
                                             <td>2011/04/25</td>
