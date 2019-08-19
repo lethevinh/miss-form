@@ -50,6 +50,7 @@ class CreateNationalDirectorFormsTable extends Migration
             $table->text('ndf_general_contact_mobile')->nullable();
             $table->text('ndf_general_contact_email')->nullable();
             $table->text('ndf_develop_team_contact_name')->nullable();
+            $table->text('ndf_develop_team_contact_title')->nullable();
             $table->text('ndf_develop_team_contact_tel')->nullable();
             $table->text('ndf_develop_team_contact_mobile')->nullable();
             $table->text('ndf_develop_team_contact_email')->nullable();
