@@ -42,7 +42,7 @@ class CreateNationalDirectorFormsTable extends Migration
             $table->text('ndf_licensee_full_name')->nullable();
             $table->text('ndf_licensee_contact_number')->nullable();
             $table->text('ndf_licensee_relationship')->nullable();
-            $table->text('ndf_licensee_email')->nullable();
+            $table->text('ndf_licensee_email_2')->nullable();
             $table->text('ndf_licensee_contact_address')->nullable();
             $table->text('ndf_general_contact_name')->nullable();
             $table->text('ndf_general_contact_title')->nullable();
