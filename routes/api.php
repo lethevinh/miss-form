@@ -46,7 +46,7 @@ Route::post('miss/national-director-form', function (Request $request) {
     foreach ($files as $key => $value) {
         if ($request->hasFile($value)) {
             $file = request()->$value;
-            $name = $input['cif_first_name'] . '_' . $input['cif_family_name'];
+            $name = $input['ndf_licensee_name'] . '_' . $input['ndf_licensee_surname'];
             $imageName = Str::slug(time() . '_' . $value . '_' . $name, '-') . '.' . $file->getClientOriginalExtension();
             $path = $file->move(public_path('uploads'), $imageName);
             $input[$value] = 'uploads' . '/' . $imageName;
