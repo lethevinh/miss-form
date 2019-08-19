@@ -99,7 +99,7 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Country</th>
+                                            <th>Company</th>
                                             <th>Name</th>
                                             <th>Office</th>
                                             <th>Age</th>
@@ -109,7 +109,7 @@
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Country</th>
+                                            <th>Company</th>
                                             <th>Name</th>
                                             <th>Office</th>
                                             <th>Age</th>
@@ -120,8 +120,8 @@
                                     <tbody>
                                     @forelse ($data as $item)
                                         <tr>
-                                            <td>{{$item->cif_country}}</td>
-                                            <td>{{$item->cif_family_name}}</td>
+                                            <td>{{$item->ndf_your_company_name}}</td>
+                                            <td>{{$item->ndf_licensee_name}}</td>
                                             <td>Edinburgh</td>
                                             <td>61</td>
                                             <td>2011/04/25</td>
