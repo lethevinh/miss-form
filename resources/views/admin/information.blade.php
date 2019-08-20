@@ -118,9 +118,9 @@
                                         <tr>
                                             @foreach($fields as $field)
                                                 @if(Str::is('*file*', $field))
-                                                    <img src="http://miss-form.osa.vn/{{$item->$field}}" alt="">
+                                                    <td><img style="width: 50px;height: 50px" src="http://miss-form.osa.vn/{{$item->$field}}" alt=""></td>
                                                 @else
-                                                <th>{{$item->$field}}</th>
+                                                <td>{{$item->$field}}</td>
                                                 @endif
                                             @endforeach
                                             <td>
