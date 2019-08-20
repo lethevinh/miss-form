@@ -117,7 +117,11 @@
                                     @forelse ($data as $item)
                                         <tr>
                                             @foreach($fields as $field)
+                                                @if(Str::is('*file*', $field))
+                                                    <img src="http://miss-form.osa.vn/{{$item->$field}}" alt="">
+                                                @else
                                                 <th>{{$item->$field}}</th>
+                                                @endif
                                             @endforeach
                                             <td>
                                                 <a href="#" class="btn btn-warning btn-circle btn-sm">
