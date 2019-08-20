@@ -19,23 +19,21 @@ header('Access-Control-Allow-Headers: Authorization, Content-Type');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
 	return $request->user();
 });
+use Illuminate\Support\Facades\Storage;
 Route::get('miss/contestants-information-form/print/{id}', function (Request $request, $id) {
     $mode = ContestantsInformationForm::find($id);
-    if ($mode){
-        /* $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(storage_path('app/public/TemplateContestantsInformation.docx'));
+    if ($mode) {
+        $pathFile = 'app/public/TemplateContestantsInformation.docx';
+        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(storage_path($pathFile));
         foreach (ContestantsInformationForm::$fields as $field) {
             $templateProcessor->setValue($field, $mode->$field);
         }
-       $name = 'app/public/'.Str::slug($mode->cif_country.'-'.$mode->cif_first_name,'-').'.docx';
-       $templateProcessor->saveAs(storage_path($name));
-       return response()->json(['link'=> url($name)]); */
-        $phpWord = new \PhpOffice\PhpWord\PhpWord();
-        $templateProcessor = $phpWord->loadTemplate(storage_path('app/public/TemplateContestantsInformation.docx'));
-        foreach (ContestantsInformationForm::$fields as $field) {
-            $templateProcessor->setValue($field, $mode->$field);
-        }
-        $filename = Str::slug($mode->cif_country.'-'.$mode->cif_first_name,'-').'.docx';
-        $phpWord->save($filename,'Word2007',true);
+        $name = Str::slug($mode->cif_country . '-' . $mode->cif_first_name, '-') . '.docx';
+        $templateProcessor->saveAs(storage_path($name));
+        // dd(Storage::disk('public')->get($name));
+        // return Storage::download(resource_path($name));
+        return Storage::disk('public')->download($name);
+
     }
 })->name('miss.get.contestants-information-form');
 
