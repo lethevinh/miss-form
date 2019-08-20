@@ -29,10 +29,10 @@ Route::get('miss/contestants-information-form/print/{id}', function (Request $re
             $templateProcessor->setValue($field, $mode->$field);
         }
         $name = Str::slug($mode->cif_country . '-' . $mode->cif_first_name, '-') . '.docx';
-        $templateProcessor->saveAs(public_path('uploads/'.$name));
+        $templateProcessor->saveAs(public_path('storage/'.$name));
         // dd(Storage::disk('public')->get($name));
         // return Storage::download(resource_path($name));
-        return Storage::disk('public')->download('uploads/'.$name);
+        return Storage::disk('public')->download($name);
 
     }
 })->name('miss.get.contestants-information-form');
