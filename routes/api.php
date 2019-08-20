@@ -34,7 +34,9 @@ Route::get('miss/contestants-information-form/print/{id}', function (Request $re
         header('Content-Transfer-Encoding: binary');
         header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
         header('Expires: 0');
-        $templateProcessor->save("php://output");
+        $documentFqfn = $templateProcessor->save();
+        $xmlWriter = \PhpOffice\PhpWord\IOFactory::createWriter($documentFqfn, 'Word2007');
+        $xmlWriter->save("php://output");
 
        //  $name = 'app/public/'.Str::slug($mode->cif_country.'-'.$mode->cif_first_name,'-').'.docx';
        // $templateProcessor->saveAs(storage_path($name));
