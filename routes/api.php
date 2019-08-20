@@ -19,6 +19,17 @@ header('Access-Control-Allow-Headers: Authorization, Content-Type');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
 	return $request->user();
 });
+Route::get('miss/contestants-information-form/print/{id}', function (Request $request, $id) {
+    $mode = ContestantsInformationForm::find($id);
+    if ($mode){
+        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(storage_path('app/public/TemplateContestantsInformation.docx'));
+        foreach (ContestantsInformationForm::$fields as $field) {
+            $templateProcessor->setValue($field, $mode->$field);
+        }
+        $templateProcessor->saveAs(storage_path('app/public/helloWorld.docx'));
+        return response()->json(['link'=> url('app/public/'.$mode->cif_country'.docx')]);
+    }
+})->name('miss.get.contestants-information-form');
 
 Route::get('miss/contestants-information-form', function (Request $request) {
 	return response()->json(ContestantsInformationForm::all());
