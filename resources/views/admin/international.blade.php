@@ -108,7 +108,11 @@
                                     <tfoot>
                                     <tr>
                                         @foreach($fields as $field)
-                                            <th>{{$field}}</th>
+                                            @if(Str::is('*file*', $field))
+                                                <td><img style="width: 50px;height: 50px" src="http://miss-form.osa.vn/{{$item->$field}}" alt=""></td>
+                                            @else
+                                                <td>{{$item->$field}}</td>
+                                            @endif
                                         @endforeach
                                         <th>Action</th>
                                     </tr>
