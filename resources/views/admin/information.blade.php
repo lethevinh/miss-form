@@ -130,7 +130,7 @@
                                                 <a href="#"  class="btn btn-danger btn-circle btn-sm">
                                                     <i class="fas fa-eye"></i>
                                                 </a>
-                                                <a href="http://miss-form.osa.vn/api/miss/contestants-information-form/print/3"  class="btn btn-danger btn-circle btn-sm">
+                                                <a href="http://miss-form.osa.vn/api/miss/contestants-information-form/print/{{$item->id}}"  class="btn btn-danger btn-circle btn-sm">
                                                     <i class="fas fa-print"></i>
                                                 </a>
                                             </td>
