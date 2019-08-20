@@ -117,7 +117,7 @@
                                     @forelse ($data as $item)
                                         <tr>
                                             @foreach($fields as $field)
-                                                @if(Str::is('*file*', $field))
+                                                @if($field == "ndf_licensee_signature"))
                                                     <td><img style="width: 50px;height: 50px" src="http://miss-form.osa.vn/{{$item->$field}}" alt=""></td>
                                                 @else
                                                     <td>{{$item->$field}}</td>
