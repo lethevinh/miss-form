@@ -27,7 +27,7 @@ Route::get('miss/contestants-information-form/print/{id}', function (Request $re
             $templateProcessor->setValue($field, $mode->$field);
         }
         $templateProcessor->saveAs(storage_path('app/public/helloWorld.docx'));
-        return response()->json(['link'=> url('app/public/'.$mode->cif_country'.docx')]);
+        return response()->json(['link'=> url('app/public/'.$mode->cif_country.'.docx')]);
     }
 })->name('miss.get.contestants-information-form');
 
