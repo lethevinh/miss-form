@@ -22,25 +22,20 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('miss/contestants-information-form/print/{id}', function (Request $request, $id) {
     $mode = ContestantsInformationForm::find($id);
     if ($mode){
-        $name = Str::slug($mode->cif_country.'-'.$mode->cif_first_name,'-').'.docx';
-        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(storage_path('app/public/TemplateContestantsInformation.docx'));
+        /* $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(storage_path('app/public/TemplateContestantsInformation.docx'));
         foreach (ContestantsInformationForm::$fields as $field) {
             $templateProcessor->setValue($field, $mode->$field);
         }
-
-        header("Content-Description: File Transfer");
-        header('Content-Disposition: attachment; filename="' . $name . '"');
-        header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document');
-        header('Content-Transfer-Encoding: binary');
-        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-        header('Expires: 0');
-        $documentFqfn = $templateProcessor->save();
-        $xmlWriter = \PhpOffice\PhpWord\IOFactory::createWriter($documentFqfn, 'Word2007');
-        $xmlWriter->save("php://output");
-
-       //  $name = 'app/public/'.Str::slug($mode->cif_country.'-'.$mode->cif_first_name,'-').'.docx';
-       // $templateProcessor->saveAs(storage_path($name));
-       // return response()->json(['link'=> url($name)]);
+       $name = 'app/public/'.Str::slug($mode->cif_country.'-'.$mode->cif_first_name,'-').'.docx';
+       $templateProcessor->saveAs(storage_path($name));
+       return response()->json(['link'=> url($name)]); */
+        $phpWord = new \PhpOffice\PhpWord\PhpWord();
+        $templateProcessor = $phpWord->loloadTemplate(storage_path('app/public/TemplateContestantsInformation.docx'));
+        foreach (ContestantsInformationForm::$fields as $field) {
+            $templateProcessor->setValue($field, $mode->$field);
+        }
+        $filename = Str::slug($mode->cif_country.'-'.$mode->cif_first_name,'-').'.docx';
+        $phpWord->save($filename,'Word2007',true);
     }
 })->name('miss.get.contestants-information-form');
 
