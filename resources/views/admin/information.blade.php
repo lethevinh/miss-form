@@ -131,25 +131,23 @@
                                                     <i class="fas fa-eye"></i>
                                                 </a>
                                             </td>
-                                            <div class="modal fade" id="exampleModal{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal fade bd-example-modal-lg" id="exampleModal{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel">{{$item->cif_country}} : {{$item->cif_first_name}} {{$item->cif_family_name}}</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
                                                                 <form>
+                                                                    @foreach($fields as $field)
                                                                     <div class="form-group">
-                                                                        <label for="recipient-name" class="col-form-label">Recipient:</label>
-                                                                        <input type="text" class="form-control" id="recipient-name">
+                                                                        <label for="recipient-name" class="col-form-label">{{$field}}:</label>
+                                                                        <input type="text" value="{{$item->$field}}" class="form-control" id="recipient-name">
                                                                     </div>
-                                                                    <div class="form-group">
-                                                                        <label for="message-text" class="col-form-label">Message:</label>
-                                                                        <textarea class="form-control" id="message-text"></textarea>
-                                                                    </div>
+                                                                    @endforeach
                                                                 </form>
                                                             </div>
                                                             <div class="modal-footer">
