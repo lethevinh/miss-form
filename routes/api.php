@@ -30,7 +30,7 @@ Route::get('miss/contestants-information-form/print/{id}', function (Request $re
        $templateProcessor->saveAs(storage_path($name));
        return response()->json(['link'=> url($name)]); */
         $phpWord = new \PhpOffice\PhpWord\PhpWord();
-        $templateProcessor = $phpWord->loloadTemplate(storage_path('app/public/TemplateContestantsInformation.docx'));
+        $templateProcessor = $phpWord->loadTemplate(storage_path('app/public/TemplateContestantsInformation.docx'));
         foreach (ContestantsInformationForm::$fields as $field) {
             $templateProcessor->setValue($field, $mode->$field);
         }
