@@ -130,6 +130,9 @@
                                                 <a href="#"  class="btn btn-danger btn-circle btn-sm">
                                                     <i class="fas fa-eye"></i>
                                                 </a>
+                                                <a href="#"  class="btn btn-danger btn-circle btn-sm">
+                                                    <i class="fas fa-print"></i>
+                                                </a>
                                             </td>
                                             <div class="modal fade bd-example-modal-lg" id="exampleModal{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
