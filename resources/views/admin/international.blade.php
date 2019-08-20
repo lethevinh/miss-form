@@ -108,11 +108,7 @@
                                     <tfoot>
                                     <tr>
                                         @foreach($fields as $field)
-                                            @if(Str::is('*file*', $field))
-                                                <td><img style="width: 50px;height: 50px" src="http://miss-form.osa.vn/{{$item->$field}}" alt=""></td>
-                                            @else
-                                                <td>{{$item->$field}}</td>
-                                            @endif
+                                            <th>{{$field}}</th>
                                         @endforeach
                                         <th>Action</th>
                                     </tr>
@@ -121,7 +117,11 @@
                                     @forelse ($data as $item)
                                         <tr>
                                             @foreach($fields as $field)
-                                                <th>{{$item->$field}}</th>
+                                                @if(Str::is('*file*', $field))
+                                                    <td><img style="width: 50px;height: 50px" src="http://miss-form.osa.vn/{{$item->$field}}" alt=""></td>
+                                                @else
+                                                    <td>{{$item->$field}}</td>
+                                                @endif
                                             @endforeach
                                             <td>
                                                 <a href="#" class="btn btn-warning btn-circle btn-sm">
