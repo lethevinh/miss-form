@@ -24,6 +24,7 @@ Route::get('miss/contestants-information-form/print/{id}', function (Request $re
     if ($mode){
         $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(storage_path('app/public/TemplateContestantsInformation.docx'));
         foreach (ContestantsInformationForm::$fields as $field) {
+            echo $field;
             $templateProcessor->setValue($field, $mode->$field);
         }
         $name = 'app/public/'.Str::slug($mode->cif_country.'-'.$mode->cif_first_name,'-').'.docx';
