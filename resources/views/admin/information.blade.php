@@ -99,32 +99,26 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Country</th>
-                                            <th>Name</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
+                                            @foreach($fields as $field)
+                                            <th>{{$field}}</th>
+                                            @endforeach
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Country</th>
-                                            <th>Name</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
+                                            @foreach($fields as $field)
+                                                <th>{{$field}}</th>
+                                            @endforeach
                                             <th>Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                     @forelse ($data as $item)
                                         <tr>
-                                            <td>{{$item->cif_country}}</td>
-                                            <td>{{$item->cif_family_name}}</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
+                                            @foreach($fields as $field)
+                                                <th>{{$item->$field}}</th>
+                                            @endforeach
                                             <td>
                                                 <a href="#" class="btn btn-warning btn-circle btn-sm">
                                                     <i class="fas fa-edit"></i>

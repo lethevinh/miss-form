@@ -19,11 +19,11 @@ Route::get('/', function () {
 
 Route::get('/contestants-information-form.html', function () {
     $data = ContestantsInformationForm::all();
-    return view('admin.information', ["data"=>$data]);
+    return view('admin.information', ["data"=>$data, 'fields'=>ContestantsInformationForm::$fields]);
 });
 Route::get('/miss-charm-international-2020.html', function () {
     $data = \App\NationalDirectorForm::all();
-    return view('admin.international', ["data"=>$data]);
+    return view('admin.international', ["data"=>$data,"fields" => \App\NationalDirectorForm::$fields]);
 });
 Route::get('/official-entry-form.html', function () {
     $data = ContestantsInformationForm::all();
