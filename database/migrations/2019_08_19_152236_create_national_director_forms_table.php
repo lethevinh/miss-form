@@ -24,6 +24,7 @@ class CreateNationalDirectorFormsTable extends Migration
             $table->text('ndf_licensee_signature')->nullable();
             $table->text('ndf_licensee_name')->nullable();
             $table->text('ndf_licensee_surname')->nullable();
+            $table->text('ndf_licensee_nationality')->nullable();
             $table->text('ndf_licensee_passport_number')->nullable();
             $table->text('ndf_licensee_gender')->nullable();
             $table->text('ndf_licensee_phone')->nullable();

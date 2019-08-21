@@ -17,6 +17,7 @@ class NationalDirectorForm extends Model
         "ndf_licensee_signature",
         "ndf_licensee_name",
         "ndf_licensee_surname",
+        "ndf_licensee_nationality",
         "ndf_licensee_passport_number",
         "ndf_licensee_gender",
         "ndf_licensee_phone",

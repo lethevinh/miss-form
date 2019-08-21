@@ -30,12 +30,23 @@ Route::get('miss/contestants-information-form/print/{id}', function (Request $re
         }
         $name = Str::slug($mode->cif_country . '-' . $mode->cif_first_name, '-') . '.docx';
         $templateProcessor->saveAs(public_path('storage/'.$name));
-        // dd(Storage::disk('public')->get($name));
-        // return Storage::download(resource_path($name));
         return Storage::disk('public')->download($name);
-
     }
-})->name('miss.get.contestants-information-form');
+})->name('miss.print.contestants-information-form');
+
+Route::get('miss/national-director-form/print/{id}', function (Request $request, $id) {
+    $model = \App\NationalDirectorForm::find($id);
+    if ($model) {
+        $pathFile = 'app/public/TemplateNationalDirector.docx';
+        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(storage_path($pathFile));
+        foreach (\App\NationalDirectorForm::$fields as $field) {
+            $templateProcessor->setValue($field, $model->$field);
+        }
+        $name = Str::slug($model->ndf_your_company_name . '-' . $model->ndf_licensee_name, '-') . '.docx';
+        $templateProcessor->saveAs(public_path('storage/'.$name));
+        return Storage::disk('public')->download($name);
+    }
+})->name('miss.print.contestants-information-form');
 
 Route::get('miss/contestants-information-form', function (Request $request) {
 	return response()->json(ContestantsInformationForm::all());
