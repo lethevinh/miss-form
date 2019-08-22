@@ -45,7 +45,7 @@ Route::get('miss/official-entry-forms/print/{id}', function (Request $request, $
         $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(storage_path($pathFile));
         foreach (\App\OfficialEntryForm::$fields as $field) {
             if (strpos($model->$field, 'uploads') !== false){
-                $templateProcessor->setImageValue($field, array('path' => 'http://miss-form.osa.vn/'.$mode->$field, 'width' => 100, 'height' => 40, 'ratio' => false));
+                $templateProcessor->setImageValue($field, array('path' => 'http://miss-form.osa.vn/'.$model->$field, 'width' => 100, 'height' => 40, 'ratio' => false));
             }else{
                 $templateProcessor->setValue($field, $model->$field);
             }
