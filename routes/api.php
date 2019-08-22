@@ -28,11 +28,25 @@ Route::get('miss/contestants-information-form/print/{id}', function (Request $re
         foreach (ContestantsInformationForm::$fields as $field) {
             $templateProcessor->setValue($field, $mode->$field);
         }
-        $name = Str::slug($mode->cif_country . '-' . $mode->cif_first_name, '-') . '.docx';
+        $name = Str::slug('contestants-information-form-'.$mode->cif_country . '-' . $mode->cif_first_name, '-') . '.docx';
         $templateProcessor->saveAs(public_path('storage/'.$name));
         return Storage::disk('public')->download($name);
     }
 })->name('miss.print.contestants-information-form');
+
+Route::get('miss/official-entry-forms/print/{id}', function (Request $request, $id) {
+    $model = \App\OfficialEntryForm::find($id);
+    if ($model) {
+        $pathFile = 'app/public/TemplateOfficialEntry.docx';
+        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(storage_path($pathFile));
+        foreach (\App\OfficialEntryForm::$fields as $field) {
+            $templateProcessor->setValue($field, $model->$field);
+        }
+        $name = Str::slug('official-entry-forms-'.$model->oef_country . '-' . $model->oef_winner_national_fullname, '-') . '.docx';
+        $templateProcessor->saveAs(public_path('storage/'.$name));
+        return Storage::disk('public')->download($name);
+    }
+})->name('miss.print.official-entry-forms');
 
 Route::get('miss/national-director-form/print/{id}', function (Request $request, $id) {
     $model = \App\NationalDirectorForm::find($id);
@@ -42,7 +56,7 @@ Route::get('miss/national-director-form/print/{id}', function (Request $request,
         foreach (\App\NationalDirectorForm::$fields as $field) {
             $templateProcessor->setValue($field, $model->$field);
         }
-        $name = Str::slug($model->ndf_your_company_name . '-' . $model->ndf_licensee_name, '-') . '.docx';
+        $name = Str::slug('national-director-form-'.$model->ndf_your_company_name . '-' . $model->ndf_licensee_name, '-') . '.docx';
         $templateProcessor->saveAs(public_path('storage/'.$name));
         return Storage::disk('public')->download($name);
     }
@@ -81,5 +95,21 @@ Route::post('miss/national-director-form', function (Request $request) {
         }
     }
     $model = \App\NationalDirectorForm::create($input);
+    return response()->json($model);
+})->name('miss.national-director-form');
+
+Route::post('miss/official-entry-forms', function (Request $request) {
+    $input = $request->input();
+    $files = ['oef_winner_signature_file','oef_signed_signature_file','oef_witness_signature_file','oef_witness_signature_file_2'];
+    foreach ($files as $key => $value) {
+        if ($request->hasFile($value)) {
+            $file = request()->$value;
+            $name = $input['oef_winner_national_fullname'] . '_' . $input['oef_country'];
+            $imageName = Str::slug(time() . '_' . $value . '_' . $name, '-') . '.' . $file->getClientOriginalExtension();
+            $path = $file->move(public_path('uploads'), $imageName);
+            $input[$value] = 'uploads' . '/' . $imageName;
+        }
+    }
+    $model = \App\OfficialEntryForm::create($input);
     return response()->json($model);
 })->name('miss.national-director-form');
