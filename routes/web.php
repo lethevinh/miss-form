@@ -26,8 +26,8 @@ Route::get('/miss-charm-international-2020.html', function () {
     return view('admin.international', ["data"=>$data,"fields" => \App\NationalDirectorForm::$fields]);
 });
 Route::get('/official-entry-form.html', function () {
-    $data = ContestantsInformationForm::all();
-    return view('admin.entry', ["data"=>$data]);
+    $data = \App\OfficialEntryForm::all();
+    return view('admin.entry', ["data"=>$data, 'fields'=>\App\OfficialEntryForm::$fields]);
 });
 
 Route::get('/admin', function () {
