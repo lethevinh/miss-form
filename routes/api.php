@@ -26,7 +26,11 @@ Route::get('miss/contestants-information-form/print/{id}', function (Request $re
         $pathFile = 'app/public/TemplateContestantsInformation.docx';
         $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(storage_path($pathFile));
         foreach (ContestantsInformationForm::$fields as $field) {
-            $templateProcessor->setValue($field, $mode->$field);
+            if (strpos($mode->$field, 'uploads') !== false){
+                $templateProcessor->setImageValue($field, array('path' => 'http://miss-form.osa.vn/'.$mode->$field, 'width' => 100, 'height' => 100, 'ratio' => false));
+            }else{
+                $templateProcessor->setValue($field, $mode->$field);
+            }
         }
         $name = Str::slug('contestants-information-form-'.$mode->cif_country . '-' . $mode->cif_first_name, '-') . '.docx';
         $templateProcessor->saveAs(public_path('storage/'.$name));
@@ -40,7 +44,11 @@ Route::get('miss/official-entry-forms/print/{id}', function (Request $request, $
         $pathFile = 'app/public/TemplateOfficialEntry.docx';
         $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(storage_path($pathFile));
         foreach (\App\OfficialEntryForm::$fields as $field) {
-            $templateProcessor->setValue($field, $model->$field);
+            if (strpos($mode->$field, 'uploads') !== false){
+                $templateProcessor->setImageValue($field, array('path' => 'http://miss-form.osa.vn/'.$mode->$field, 'width' => 100, 'height' => 100, 'ratio' => false));
+            }else{
+                $templateProcessor->setValue($field, $mode->$field);
+            }
         }
         $name = Str::slug('official-entry-forms-'.$model->oef_country . '-' . $model->oef_winner_national_fullname, '-') . '.docx';
         $templateProcessor->saveAs(public_path('storage/'.$name));
@@ -54,7 +62,11 @@ Route::get('miss/national-director-form/print/{id}', function (Request $request,
         $pathFile = 'app/public/TemplateNationalDirector.docx';
         $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(storage_path($pathFile));
         foreach (\App\NationalDirectorForm::$fields as $field) {
-            $templateProcessor->setValue($field, $model->$field);
+            if ($field == 'ndf_licensee_signature'){
+                $templateProcessor->setImageValue($field, array('path' => 'http://miss-form.osa.vn/'.$mode->$field, 'width' => 100, 'height' => 100, 'ratio' => false));
+            }else{
+                $templateProcessor->setValue($field, $model->$field);
+            }
         }
         $name = Str::slug('national-director-form-'.$model->ndf_your_company_name . '-' . $model->ndf_licensee_name, '-') . '.docx';
         $templateProcessor->saveAs(public_path('storage/'.$name));
