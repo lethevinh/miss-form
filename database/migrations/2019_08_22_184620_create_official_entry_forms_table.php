@@ -35,7 +35,7 @@ class CreateOfficialEntryFormsTable extends Migration {
 			$table->text('oef_witness_occupation')->nullable();
 			$table->text('oef_witness_address')->nullable();
 			$table->text('oef_witness_signature_file')->nullable();
-			$table->text('oef_licensee_signature')->nullable();
+			$table->text('oef_licensee_signature_file')->nullable();
 			$table->text('oef_licensee_date')->nullable();
 			$table->text('oef_licensee_page')->nullable();
 			$table->text('oef_witness_name_2')->nullable();
