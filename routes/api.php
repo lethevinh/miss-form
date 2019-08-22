@@ -27,7 +27,7 @@ Route::get('miss/contestants-information-form/print/{id}', function (Request $re
         $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(storage_path($pathFile));
         foreach (ContestantsInformationForm::$fields as $field) {
             if (strpos($mode->$field, 'uploads') !== false){
-                $templateProcessor->setImageValue($field, array('path' => 'http://miss-form.osa.vn/'.$mode->$field, 'width' => 100, 'height' => 100, 'ratio' => false));
+                $templateProcessor->setImageValue($field, array('path' => 'http://miss-form.osa.vn/'.$mode->$field, 'width' => 100, 'height' => 40, 'ratio' => false));
             }else{
                 $templateProcessor->setValue($field, $mode->$field);
             }
@@ -44,10 +44,10 @@ Route::get('miss/official-entry-forms/print/{id}', function (Request $request, $
         $pathFile = 'app/public/TemplateOfficialEntry.docx';
         $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(storage_path($pathFile));
         foreach (\App\OfficialEntryForm::$fields as $field) {
-            if (strpos($mode->$field, 'uploads') !== false){
-                $templateProcessor->setImageValue($field, array('path' => 'http://miss-form.osa.vn/'.$mode->$field, 'width' => 100, 'height' => 100, 'ratio' => false));
+            if (strpos($model->$field, 'uploads') !== false){
+                $templateProcessor->setImageValue($field, array('path' => 'http://miss-form.osa.vn/'.$mode->$field, 'width' => 100, 'height' => 40, 'ratio' => false));
             }else{
-                $templateProcessor->setValue($field, $mode->$field);
+                $templateProcessor->setValue($field, $model->$field);
             }
         }
         $name = Str::slug('official-entry-forms-'.$model->oef_country . '-' . $model->oef_winner_national_fullname, '-') . '.docx';
@@ -63,7 +63,7 @@ Route::get('miss/national-director-form/print/{id}', function (Request $request,
         $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(storage_path($pathFile));
         foreach (\App\NationalDirectorForm::$fields as $field) {
             if ($field == 'ndf_licensee_signature'){
-                $templateProcessor->setImageValue($field, array('path' => 'http://miss-form.osa.vn/'.$mode->$field, 'width' => 100, 'height' => 100, 'ratio' => false));
+                $templateProcessor->setImageValue($field, array('path' => 'http://miss-form.osa.vn/'.$model->$field, 'width' => 100, 'height' => 40, 'ratio' => false));
             }else{
                 $templateProcessor->setValue($field, $model->$field);
             }
