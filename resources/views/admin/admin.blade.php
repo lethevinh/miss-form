@@ -52,6 +52,12 @@
                     <span>Official Entry Form 2020</span>
                 </a>
             </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="flight-information-form.html">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>FLIGHT INFORMATION FORM</span>
+                </a>
+            </li>
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
             <!-- Sidebar Toggler (Sidebar) -->
@@ -83,7 +89,6 @@
                     </form>
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-
                     </ul>
                 </nav>
                 <!-- End of Topbar -->

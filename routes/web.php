@@ -17,6 +17,11 @@ Route::get('/', function () {
 	return view('welcome');
 });
 
+Route::get('/flight-information-form.html', function () {
+	$data = FlightInformationForm::all();
+	return view('admin.flight', ["data" => $data, 'fields' => FlightInformationForm::$fields]);
+});
+
 Route::get('/contestants-information-form.html', function () {
 	$data = ContestantsInformationForm::all();
 	return view('admin.information', ["data" => $data, 'fields' => ContestantsInformationForm::$fields]);

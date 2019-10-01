@@ -52,6 +52,12 @@
                     <span>Official Entry Form 2020</span>
                 </a>
             </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="flight-information-form.html">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>FLIGHT INFORMATION FORM</span>
+                </a>
+            </li>
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
             <!-- Sidebar Toggler (Sidebar) -->
@@ -83,7 +89,6 @@
                     </form>
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-
                     </ul>
                 </nav>
                 <!-- End of Topbar -->
@@ -93,44 +98,43 @@
                     <h1 class="h3 mb-2 text-gray-800">Official Entry Form 2020</h1>
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
-                                    <tr>
-                                        @foreach($fields as $field)
-                                            <th>{{$field}}</th>
-                                        @endforeach
-                                        <th>Action</th>
-                                    </tr>
-                                    </thead>
-                                    <tfoot>
-                                    <tr>
-                                        @foreach($fields as $field)
-                                            <th>{{$field}}</th>
-                                        @endforeach
-                                        <th>Action</th>
-                                    </tr>
-                                    </tfoot>
-                                    <tbody>
-                                    @forelse ($data as $item)
                                         <tr>
                                             @foreach($fields as $field)
-                                                @if(Str::is('*file*', $field))
-                                                    <td><img style="width: 50px;height: 50px" src="http://miss-form.osa.vn/{{$item->$field}}" alt=""></td>
-                                                @else
-                                                    <td>{{$item->$field}}</td>
-                                                @endif
+                                            <th>{{$field}}</th>
+                                            @endforeach
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            @foreach($fields as $field)
+                                            <th>{{$field}}</th>
+                                            @endforeach
+                                            <th>Action</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        @forelse ($data as $item)
+                                        <tr>
+                                            @foreach($fields as $field)
+                                            @if(Str::is('*file*', $field))
+                                            <td><img style="width: 50px;height: 50px" src="http://miss-form.osa.vn/{{$item->$field}}" alt=""></td>
+                                            @else
+                                            <td>{{$item->$field}}</td>
+                                            @endif
                                             @endforeach
                                             <td>
                                                 <a href="#" data-toggle="modal" data-target="#exampleModal{{$item->id}}" class="btn btn-warning btn-circle btn-sm">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
-                                                <a href="#"  class="btn btn-danger btn-circle btn-sm">
+                                                <a href="#" class="btn btn-danger btn-circle btn-sm">
                                                     <i class="fas fa-eye"></i>
                                                 </a>
-                                                <a href="http://miss-form.osa.vn/api/miss/official-entry-forms/print/{{$item->id}}"  class="btn btn-danger btn-circle btn-sm">
+                                                <a href="http://miss-form.osa.vn/api/miss/official-entry-forms/print/{{$item->id}}" class="btn btn-danger btn-circle btn-sm">
                                                     <i class="fas fa-print"></i>
                                                 </a>
                                             </td>
@@ -146,10 +150,10 @@
                                                         <div class="modal-body">
                                                             <form>
                                                                 @foreach($fields as $field)
-                                                                    <div class="form-group">
-                                                                        <label for="recipient-name" class="col-form-label">{{$field}}:</label>
-                                                                        <input type="text" value="{{$item->$field}}" class="form-control" id="recipient-name">
-                                                                    </div>
+                                                                <div class="form-group">
+                                                                    <label for="recipient-name" class="col-form-label">{{$field}}:</label>
+                                                                    <input type="text" value="{{$item->$field}}" class="form-control" id="recipient-name">
+                                                                </div>
                                                                 @endforeach
                                                             </form>
                                                         </div>
@@ -161,9 +165,9 @@
                                                 </div>
                                             </div>
                                         </tr>
-                                    @empty
+                                        @empty
                                         <p>No data</p>
-                                    @endforelse
+                                        @endforelse
                                     </tbody>
                                 </table>
                             </div>
