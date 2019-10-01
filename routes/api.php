@@ -143,11 +143,11 @@ Route::post('miss/flight-information-form', function (Request $request) {
 })->name('miss.flight-information-form');
 
 Route::get('miss/flight-information-form/print/{id}', function (Request $request, $id) {
-	$model = \App\NationalDirectorForm::find($id);
+	$model = \App\FlightInformationForm::find($id);
 	if ($model) {
 		$pathFile = 'app/public/TemplateFlightInformation.docx';
 		$templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(storage_path($pathFile));
-		foreach (\App\NationalDirectorForm::$fields as $field) {
+		foreach (\App\FlightInformationForm::$fields as $field) {
 			if ($field == 'fif_file_passport' || $field == 'fif_file_signed') {
 				$templateProcessor->setImageValue($field, array('path' => 'http://miss-form.osa.vn/' . $model->$field, 'width' => 100, 'height' => 40, 'ratio' => false));
 			} else {
