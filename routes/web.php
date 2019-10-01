@@ -12,6 +12,7 @@
  */
 
 use App\ContestantsInformationForm;
+use App\FlightInformationForm;
 
 Route::get('/', function () {
 	return view('welcome');
