@@ -95,7 +95,7 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Miss Charm International 2020</h1>
+                    <h1 class="h3 mb-2 text-gray-800">FLIGHT INFORMATION FORM</h1>
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-body">
@@ -121,7 +121,7 @@
                                         @forelse ($data as $item)
                                         <tr>
                                             @foreach($fields as $field)
-                                            @if($field == "ndf_licensee_signature"))
+                                            @if(Str::is('*file*', $field))
                                             <td><img style="width: 50px;height: 50px" src="http://miss-form.osa.vn/{{$item->$field}}" alt=""></td>
                                             @else
                                             <td>{{$item->$field}}</td>
