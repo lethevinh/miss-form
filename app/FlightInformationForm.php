@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 class FlightInformationForm extends Model {
-	protected $table = 'national_director_forms';
+	protected $table = 'flight_information_forms';
 	protected $fillable = [
 		"fif_country",
 		"fif_name",
