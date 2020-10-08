@@ -131,8 +131,8 @@
                                                 <a href="#" data-toggle="modal" data-target="#exampleModal{{$item->id}}" class="btn btn-warning btn-circle btn-sm">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
-                                                <a href="#" class="btn btn-danger btn-circle btn-sm">
-                                                    <i class="fas fa-eye"></i>
+                                                <a href="http://miss-form.osa.vn/api/miss/contestants-information-form/delete/{{$item->id}}" class="btn btn-danger btn-circle btn-sm">
+                                                    <i class="fas fa-trash"></i>
                                                 </a>
                                                 <a href="http://miss-form.osa.vn/api/miss/contestants-information-form/print/{{$item->id}}" class="btn btn-danger btn-circle btn-sm">
                                                     <i class="fas fa-print"></i>

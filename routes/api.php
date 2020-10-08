@@ -1,8 +1,12 @@
 <?php
 
+use App\FlightInformationForm;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Headers: Authorization, Content-Type');
 /*
@@ -20,6 +24,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 	return $request->user();
 });
 use \App\ContestantsInformationForm;
+Route::get('miss/contestants-information-form/delete/{id}', function (Request $request, $id) {
+	$mode = ContestantsInformationForm::find($id)->delete();
+});
+
 Route::get('miss/contestants-information-form/print/{id}', function (Request $request, $id) {
 	$mode = ContestantsInformationForm::find($id);
 	if ($mode) {
@@ -38,6 +46,10 @@ Route::get('miss/contestants-information-form/print/{id}', function (Request $re
 	}
 })->name('miss.print.contestants-information-form');
 
+Route::get('miss/official-entry-forms/delete/{id}', function (Request $request, $id) {
+	$model = \App\OfficialEntryForm::find($id)->delete();
+});
+
 Route::get('miss/official-entry-forms/print/{id}', function (Request $request, $id) {
 	$model = \App\OfficialEntryForm::find($id);
 	if ($model) {
@@ -55,6 +67,10 @@ Route::get('miss/official-entry-forms/print/{id}', function (Request $request, $
 		return Storage::disk('public')->download($name);
 	}
 })->name('miss.print.official-entry-forms');
+
+Route::get('miss/national-director-form/delete/{id}', function (Request $request, $id) {
+	$model = \App\NationalDirectorForm::find($id)->delete();
+});
 
 Route::get('miss/national-director-form/print/{id}', function (Request $request, $id) {
 	$model = \App\NationalDirectorForm::find($id);
@@ -142,6 +158,9 @@ Route::post('miss/flight-information-form', function (Request $request) {
 	return response()->json($model);
 })->name('miss.flight-information-form');
 
+Route::get('miss/flight-information-form/delete/{id}', function (Request $request, $id) {
+	$model = \App\FlightInformationForm::find($id)->delete();
+});
 Route::get('miss/flight-information-form/print/{id}', function (Request $request, $id) {
 	$model = \App\FlightInformationForm::find($id);
 	if ($model) {
@@ -158,4 +177,95 @@ Route::get('miss/flight-information-form/print/{id}', function (Request $request
 		$templateProcessor->saveAs(public_path('storage/' . $name));
 		return Storage::disk('public')->download($name);
 	}
+})->name('miss.print.contestants-information-form');
+
+Route::get('v1/test-chat-bot', function (Request $request) {
+	/* return response()->json([
+		"success" => true,
+		"errorCode" => "200",
+		"errorMsg" => "",
+		"fields" => [
+			"country" => "Vietnam",
+			"cases" => 95,
+			"todayCases" => 0,
+			"deaths" => 0,
+			"todayDeaths" => 0,
+			"recovered" => 17,
+			"critical" => 0,
+		],
+	]);*/
+	$client = new Client();
+	$res = $client->request('GET', 'https://disease.sh/v2/countries', [
+		'headers' => [
+			'Content-Type' => 'application/json',
+		],
+	]);
+
+	$data = json_decode($res->getBody());
+	$name = "Vietnam";
+	$venture = strtoupper($request->input('venture'));
+	switch ($venture) {
+	case 'TH':
+		$name = "Thailand";
+		break;
+
+	case 'ID':
+		$name = "Indonesia";
+		break;
+
+	case 'MY':
+		$name = "Malaysia";
+		break;
+
+	case 'SG':
+		$name = "Singapore";
+		break;
+
+	case 'PH':
+		$name = "Philippines";
+		break;
+
+	case 'CH':
+		$name = "China";
+		break;
+
+	default:
+		$name = "Vietnam";
+		break;
+	}
+
+	if ($venture == "VN") {
+		$country = [
+			"country" => "Vietnam",
+			"cases" => 57,
+			"todayCases" => 0,
+			"deaths" => 0,
+			"todayDeaths" => 0,
+			"recovered" => 16,
+			"critical" => 0,
+		];
+	}
+
+	$first = Arr::first($data, function ($value, $key) use ($name) {
+		return $value->country == $name;
+	});
+
+	return response()->json([
+		"success" => true,
+		"errorCode" => "200",
+		"errorMsg" => "",
+		"fields" => $first,
+	]);
+})->name('miss.print.contestants-information-form');
+
+Route::get('v1/test-chat-bot-2', function (Request $request) {
+	$client = new Client();
+	$res = $client->request('GET', 'https://disease.sh/v2/countries', [
+		'headers' => [
+			'Content-Type' => 'application/json',
+		],
+	]);
+
+	$results = json_decode($res->getBody());
+	dd($results);
 })->name('miss.print.contestants-information-form');

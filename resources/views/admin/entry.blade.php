@@ -134,6 +134,10 @@
                                                 <a href="#" class="btn btn-danger btn-circle btn-sm">
                                                     <i class="fas fa-eye"></i>
                                                 </a>
+
+                                                <a href="http://miss-form.osa.vn/api/miss/official-entry-forms/delete/{{$item->id}}" class="btn btn-danger btn-circle btn-sm">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
                                                 <a href="http://miss-form.osa.vn/api/miss/official-entry-forms/print/{{$item->id}}" class="btn btn-danger btn-circle btn-sm">
                                                     <i class="fas fa-print"></i>
                                                 </a>
